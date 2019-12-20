@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Person } from './person';
+import { PersonDataService } from './person-data.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  name = 'とうめ';
+
+  person:Person;
+
+  constructor(private personDataService:PersonDataService) {}
+
+  ngOnInit() {
+    this.personDataService.getPerson().subscribe(
+      (data) => this.person = data
+      );
+  }
 }
